@@ -1,4 +1,6 @@
 import streamlit as st
+from streamlit_folium import folium_static
+import folium
 
 st.sidebar.header("공원특성 입력")
 # 변수 1
@@ -17,3 +19,22 @@ my_select_Z = st.sidebar.selectbox("얼마나 머물 수 있나요?", ["30분", 
 
 st.title("당신에게 맞는 공원 추천")
 
+st.header("공원 정보")
+
+st.write("공원 이름 : 광주 시민의 숲")
+st.write("공원 정보 : [list]")
+st.write("공원 시설 : [list]")
+
+st.header("공원 위치")
+
+# center on Liberty Bell
+m = folium.Map(location=[35.22835136646543, 126.86179035625973], zoom_start=16)
+
+# add marker for Liberty Bell
+tooltip = "Liberty Bell"
+folium.Marker(
+    [35.22835136646543, 126.86179035625973], popup="Liberty Bell", tooltip=tooltip
+).add_to(m)
+
+# call to render Folium map in Streamlit
+folium_static(m)
